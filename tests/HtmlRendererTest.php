@@ -9,10 +9,10 @@ use AutoTeacher\HtmlRenderer;
 require_once __DIR__ . '/../classes/HtmlRenderer.php';
 
 final class HtmlRendererTest extends TestCase {
+
     private $_renderer = null;
 
-    public function __construct() {
-        parent::__construct();
+    public function setUp():void {
         $this->_renderer = new HtmlRenderer();
     }
 

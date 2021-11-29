@@ -14,47 +14,43 @@ require_once __DIR__ . '/../../classes/Tasks/AdditionTask.php';
 final class AdditionTaskTest extends TestCase {
 
     private $_taskType = TaskFactory::TASK_ADDITION;
-    
-    public function testOperand(): void {
+
+    private $_task = null;
+
+    public function setUp():void {
         $factory = new TaskFactory();
         $factory->setTaskType($this->_taskType);
-        $task = $factory->createTask();
+        $this->_task = $factory->createTask();
+    }
 
+    public function testOperand(): void {
         $operand = '5';
-        $task->setLeftOperand($operand);
-        $this->assertEquals($operand, $task->getLeftOperand());
+        $this->_task->setLeftOperand($operand);
+        $this->assertEquals($operand, $this->_task->getLeftOperand());
 
         $operand = '10';
-        $task->setRightOperand($operand);
-        $this->assertEquals($operand, $task->getRightOperand());
+        $this->_task->setRightOperand($operand);
+        $this->assertEquals($operand, $this->_task->getRightOperand());
 
-        $this->assertNotEquals($task->getLeftOperand(), $task->getRightOperand());
+        $this->assertNotEquals($this->_task->getLeftOperand(), $this->_task->getRightOperand());
     }
 
     public function testGetResult(): void {
-        $factory = new TaskFactory();
-        $factory->setTaskType($this->_taskType);
-        $task = $factory->createTask();
-
         $leftOperand = '15';
         $rightOperand = '21';
-        $task->setLeftOperand($leftOperand);
-        $task->setRightOperand($rightOperand);
+        $this->_task->setLeftOperand($leftOperand);
+        $this->_task->setRightOperand($rightOperand);
         $result = (string) ((int) $leftOperand + (int) $rightOperand);
-        $this->assertEquals($result, $task->getResult());
+        $this->assertEquals($result, $this->_task->getResult());
     }
 
     public function testGetExercise(): void {
-        $factory = new TaskFactory();
-        $factory->setTaskType($this->_taskType);
-        $task = $factory->createTask();
-
         $leftOperand = '15';
         $rightOperand = '21';
-        $task->setLeftOperand($leftOperand);
-        $task->setRightOperand($rightOperand);
+        $this->_task->setLeftOperand($leftOperand);
+        $this->_task->setRightOperand($rightOperand);
         $result = $leftOperand . ' + ' . $rightOperand . ' = ';
-        $this->assertEquals($result, $task->getExercise());
+        $this->assertEquals($result, $this->_task->getExercise());
     }
 
 }
